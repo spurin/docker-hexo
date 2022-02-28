@@ -1,10 +1,9 @@
-[![Docker Pulls](https://img.shields.io/docker/pulls/spurin/hexo.svg)](https://hub.docker.com/r/spurin/hexo/)
-[![](https://images.microbadger.com/badges/version/spurin/hexo.svg)](https://microbadger.com/images/spurin/hexo "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/image/spurin/hexo.svg)](https://microbadger.com/images/spurin/hexo "Get your own image badge on microbadger.com")
-[![Build Status](https://img.shields.io/docker/cloud/build/spurin/hexo.svg)](https://hub.docker.com/r/spurin/hexo/)
-
 Hexo 🐋
 ============
+
+[![Follow](https://shields.io/twitter/follow/jamesspurin?label=Follow)](https://twitter.com/jamesspurin)
+[![Docker Pulls](https://img.shields.io/docker/pulls/spurin/hexo.svg)](https://hub.docker.com/r/spurin/hexo/)
+[![Build Status](https://img.shields.io/docker/cloud/build/spurin/hexo.svg)](https://hub.docker.com/r/spurin/hexo/)
 
 Dockerfile for [Hexo](https://hexo.io/) with [Hexo Admin](https://github.com/jaredly/hexo-admin)
 
