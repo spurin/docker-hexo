@@ -1,4 +1,4 @@
-FROM node:13-slim
+FROM node:20-bullseye
 
 MAINTAINER James Spurin <james@spurin.com>
 
