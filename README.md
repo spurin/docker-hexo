@@ -13,21 +13,27 @@ A tutorial is available at [spurin.com](https://spurin.com/2020/01/04/Creating-a
 
 Latest update locks the node version to 13-slim rather than slim (which at the time of writing is 14), whilst Hexo appears to work for most areas, there is at present an outstanding issue that prevents the `hexo deploy` working with 14.  See [Hexo 4275]( https://github.com/hexojs/hexo/issues/4275)
 
+Now the default Dockerfile is non-root user for security and convenience. If you want to run it in root, build an image yourself.
+Command line is as follows:
+```
+docker build -t hexo-root -f hexo_root_access.Dockerfile .
+```
+
 ## Getting Started
 
-Create a new blog container, substitute *domain.com* for your domain and specify your blog location with -v target:/app, specify your git user and email address (for deployment):
+Create a new blog container, substitute *domain.com* for your domain and specify your blog location with -v target:/home/node/app, specify your git user and email address (for deployment):
 
 ```
 docker create --name=hexo-domain.com \
 -e HEXO_SERVER_PORT=4000 \
 -e GIT_USER="Your Name" \
 -e GIT_EMAIL="your.email@domain.tld" \
--v /blog/domain.com:/app \
+-v ~/blog/domain.com:/home/node/app \
 -p 4000:4000 \
 spurin/hexo
 ```
 
-If a blog is not configured in /app (locally as /blog/domain.com) already, it will be created and Hexo-Admin will be installed into the blog as the container is started
+If a blog is not configured in /home/node/app (locally as /blog/domain.com) already, it will be created and Hexo-Admin will be installed into the blog as the container is started
 
 ```
 docker start hexo-domain.com
@@ -54,7 +60,7 @@ docker logs --follow hexo-domain.com
 Each theme will vary but for example, a theme such as [Hueman](https://github.com/ppoffice/hexo-theme-hueman), clone the repository to the themes directory within the app volume
 
 ```
-cd /app
+cd /home/node/app
 git clone https://github.com/ppoffice/hexo-theme-hueman.git themes/hueman
 ```
 

@@ -15,18 +15,15 @@ RUN \
  apt-get install git -y && \
  npm install -g hexo-cli
 
-# Add non-root user
-USER node
-
 # Set workdir
-WORKDIR /home/node/app
+WORKDIR /app
 
 # Expose Server Port
 EXPOSE ${HEXO_SERVER_PORT}
 
 # Build a base server and configuration if it doesnt exist, then start
 CMD \
-  if [ "$(ls -A /home/node/app)" ]; then \
+  if [ "$(ls -A /app)" ]; then \
     echo "***** App directory exists and has content, continuing *****"; \
   else \
     echo "***** App directory is empty, initialising with hexo and hexo-admin *****" && \
@@ -34,17 +31,17 @@ CMD \
     npm install && \
     npm install --save hexo-admin; \
   fi; \
-  if [ ! -f /home/node/app/requirements.txt ]; then \
+  if [ ! -f /app/requirements.txt ]; then \
     echo "***** App directory contains no requirements.txt file, continuing *****"; \
   else \
     echo "***** App directory contains a requirements.txt file, installing npm requirements *****"; \
-    cat /home/node/app/requirements.txt | xargs npm --prefer-offline install --save; \
+    cat /app/requirements.txt | xargs npm --prefer-offline install --save; \
   fi; \
-  if [ ! -d "/home/node/app/.ssh" ]; then \
-    echo "***** directory ~/.ssh does not exist, making one right away *****"; \
-    mkdir -p /home/node/app/.ssh; \
+  if [ ! -d "/app/.ssh" ]; then \
+    echo "***** directory /app/.ssh does not exist, making one right away *****"; \
+    mkdir -p /app/.ssh; \
   fi; \
-  if [ "$(ls -A /home/node/app/.ssh 2>/dev/null)" ]; then \
+  if [ "$(ls -A /app/.ssh 2>/dev/null)" ]; then \
     echo "***** App .ssh directory exists and has content, continuing *****"; \
   else \
     echo "***** App .ssh directory is empty, initialising ssh key and configuring known_hosts for common git repositories (github/gitlab) *****" && \
@@ -52,13 +49,13 @@ CMD \
     ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -P "" && \
     ssh-keyscan github.com > ~/.ssh/known_hosts 2>/dev/null && \
     ssh-keyscan gitlab.com >> ~/.ssh/known_hosts 2>/dev/null && \
-    cp -r ~/.ssh /home/node/app; \
+    cp -r ~/.ssh /app; \
   fi; \
   echo "***** Running git config, user = ${GIT_USER}, email = ${GIT_EMAIL} *****" && \
   git config --global user.email ${GIT_EMAIL} && \
   git config --global user.name ${GIT_USER} && \
   echo "***** Copying .ssh from App directory and setting permissions *****" && \
-  cp -r /home/node/app/.ssh ~/ && \
+  cp -r /app/.ssh ~/ && \
   chmod 600 ~/.ssh/id_rsa && \
   chmod 600 ~/.ssh/id_rsa.pub && \
   chmod 700 ~/.ssh && \
