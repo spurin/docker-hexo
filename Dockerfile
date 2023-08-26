@@ -37,6 +37,10 @@ CMD \
     echo "***** App directory contains a requirements.txt file, installing npm requirements *****"; \
     cat /app/requirements.txt | xargs npm --prefer-offline install --save; \
   fi; \
+  if [ ! -d "/app/.ssh" ]; then \
+    echo "***** /app/.ssh does not exist, directory is made *****"; \
+    mkdir -p /app/.ssh; \
+  fi; \
   if [ "$(ls -A /app/.ssh 2>/dev/null)" ]; then \
     echo "***** App .ssh directory exists and has content, continuing *****"; \
   else \
