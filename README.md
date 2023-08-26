@@ -27,7 +27,7 @@ Later, you can pull from dockerhub.
 
 ## Getting Started
 
-**ROOT MODE (DEFAULT)**
+### ROOT MODE (DEFAULT)
 
 Create a new blog container, substitute *domain.com* for your domain and specify your blog location with -v target:/app, specify your git user and email address (for deployment):
 
@@ -48,7 +48,7 @@ docker start hexo-domain.com
 ```
 
 
-**NON-ROOT MODE (PC USERS)**
+### NON-ROOT MODE (PC USERS)
 
 Create a new blog container, substitute *domain.com* for your domain and specify your blog location with -v target:/home/node/app, specify your git user and email address (for deployment):
 
