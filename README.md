@@ -86,11 +86,11 @@ Deployment keys are configured as part of the initial app configuration, see the
 docker logs --follow hexo-domain.com
 ```
 
-### Installing a theme
+## Installing a theme
 
 Each theme will vary but for example, a theme such as [Hueman](https://github.com/ppoffice/hexo-theme-hueman), clone the repository to the themes directory within the app volume
 
-#### Execute inside container
+### Execute inside container
 
 Run this commmand line to access the container:
 
@@ -130,7 +130,7 @@ docker restart hexo-domain.com
 ```
 
 
-#### Execute outside container (non-root version only)
+### Execute outside container (non-root version only)
 
 Non-root access is the key feature of this update so that you can control your app volume outside the container, steps are quite the similar but more convenient:
 
